@@ -1,16 +1,16 @@
 SNAME ?= test
-NAME ?= elswork/$(SNAME)
-AUTHOR ?= Eloy Lopez
 USERNAME ?= elswork
-MANTAINER ?= $(AUTHOR) <elswork@gmail.com>
-VENDOR ?= Deft Work
-MYURL ?= https://deft.work/
-MYURL_DESCR ?= Deft.Work my personal blog
-SPONSORURL ?= https://github.com/sponsors/elswork
-PARAM ?= someparameter
+NAME ?= $(USERNAME)/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
 BASENAME ?= alpine:$(BASE)
+AUTHOR ?= Eloy Lopez
+MANTAINER ?= $(AUTHOR) <elswork@gmail.com>
+VENDOR ?= Deft Work
+MYURL ?= https://deft.work
+MYURL_DESCR ?= Deft.Work my personal blog
+SPONSORURL ?= https://github.com/sponsors/elswork
+PARAM ?= someparameter
 
 # HELP
 # This will output the help for each task
@@ -37,22 +37,25 @@ makefile: ## Create Makefile
 	cat sample/Makefile \
 	| sed "s/\[SNAME\]/$(SNAME)/g" \
 	| sed "s/\[USERNAME\]/$(USERNAME)/g" \
-	| sed "s/\[BASEIMAGE\]/$(BASEIMAGE)/g" \
+	| sed "s/\[BASENAME\]/$(BASENAME)/g" \
+	| sed "s/\[PARAM\]/$(PARAM)/g" \
 	> ../$(SNAME)/Makefile
 readmefile: ## Create README.md file
 	cat sample/README.md \
 	| sed "s/\[SNAME\]/$(SNAME)/g" \
 	| sed "s/\[USERNAME\]/$(USERNAME)/g" \
-	| sed "s/\[MYURL\]/$(MYURL)/g" \
+	| sed "s#\[MYURL\]#$(MYURL)#g" \
 	| sed "s/\[MYURL_DESCR\]/$(MYURL_DESCR)/g" \
+	| sed "s#\[SPONSORURL\]#$(SPONSORURL)#g" \
+	| sed "s/\[PARAM\]/$(PARAM)/g" \
 	> ../$(SNAME)/README.md
 dockerfile: ## Create Dockerfile file
 	cat sample/Dockerfile \
 	| sed "s/\[SNAME\]/$(SNAME)/g" \
-	| sed "s/\[USERNAME\]/$(USERNAME)/g" \
+	| sed "s/\[BASENAME\]/$(BASENAME)/g" \
+	| sed "s/\[AUTHOR\]/$(AUTHOR)/g" \
 	| sed "s/\[MANTAINER\]/$(MANTAINER)/g" \
-	| sed "s/\[BASEIMAGE\]/$(BASEIMAGE)/g" \
-	| sed "s/\[MYURL\]/$(MYURL)/g" \
 	| sed "s/\[VENDOR\]/$(VENDOR)/g" \
+	| sed "s#\[MYURL\]#$(MYURL)#g" \
 	> ../$(SNAME)/Dockerfile
 all: creadir licensefile versionfile makefile readmefile dockerfile ## Create a new project

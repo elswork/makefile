@@ -1,4 +1,4 @@
-ARG BASEIMAGE=[BASEIMAGE]
+ARG BASEIMAGE=[BASENAME]
 FROM ${BASEIMAGE}
 
 ARG BUILD_DATE
@@ -8,7 +8,7 @@ LABEL mantainer="[MANTAINER]" \
     org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="[SNAME]" \
     org.label-schema.description="[SNAME] is a general purpose tool" \
-    org.label-schema.url="[MYURL][SNAME]" \
+    org.label-schema.url="[MYURL]/[SNAME]" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url="https://github.com/[AUTHOR]/[SNAME]" \
     org.label-schema.vendor="[VENDOR]" \
