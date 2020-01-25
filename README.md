@@ -1,36 +1,20 @@
-# test
+# Makefile
 
-A [Docker](http://docker.com) file to build [test](https://github.com/test).
+A Makefile to create a new docker project.
 
-> Be aware! You should read carefully the usage documentation of every tool!
+> Be aware! You should change most of the Makefile parameters!
 
 ## Details
 
-- [GitHub](https://github.com/elswork/test)
+- [GitHub](https://github.com/elswork/makefile)
 - [Deft.Work my personal blog](https://deft.work)
 
-| Docker Hub | Docker Pulls | Docker Stars | Size/Layers |
-| --- | --- | --- | --- |
-| [test](https://hub.docker.com/r/elswork/test "elswork/test on Docker Hub") | [![](https://img.shields.io/docker/pulls/elswork/test.svg)](https://hub.docker.com/r/elswork/test "test on Docker Hub") | [![](https://img.shields.io/docker/stars/elswork/test.svg)](https://hub.docker.com/r/elswork/test "test on Docker Hub") | [![](https://images.microbadger.com/badges/image/elswork/test.svg)](https://microbadger.com/images/elswork/test "test on microbadger.com") |
-
-## Build Instructions
-Build for amd64, armv7l or arm64 architecture (thanks to its [Multi-Arch](https://blog.docker.com/2017/11/multi-arch-all-the-things/) base image)
-
-```bash
-docker build -t elswork/test .
-```
+This Makefile will create a folder at the same level as this folder with the most common files I use every time I want to create a new project, this files are already configured to speed up my usual workflow.
 
 ## Usage Example
 
-### Start container
-
 ```bash
-docker run --rm elswork/test \
- https://www.theworldsworstwebsiteever.com/
-```
-or
-```bash
-make start SITE=https://www.theworldsworstwebsiteever.com/
+make all SNAME=projectname
 ```
 
 **[Sponsor me!](https://github.com/sponsors/elswork) Together we will be unstoppable.**
