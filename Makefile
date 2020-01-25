@@ -26,6 +26,8 @@ help: ## This help.
 
 creadir: ## Create Directory 
 	mkdir -p ../$(SNAME)
+exp: ## Export
+	export
 licensefile: ## Create license file
 	cat sample/LICENSE \
 	| sed "s/\[year\]/`date +%Y`/g" \
