@@ -1,4 +1,9 @@
-SNAME ?= test
+ifneq ("$(wildcard $(CURDIR)/.env)","")
+	include $(CURDIR)/.env
+	export $(shell sed 's/=.*//' .env)
+endif
+
+export SNAME ?= test
 USERNAME ?= elswork
 NAME ?= $(USERNAME)/$(SNAME)
 VER ?= `cat VERSION`
@@ -27,7 +32,9 @@ help: ## This help.
 creadir: ## Create Directory 
 	mkdir -p ../$(SNAME)
 exp: ## Export
-	export
+	export $(shell sed 's/=.*//' .env)
+hola: ## hola
+	echo $(SNAME)
 licensefile: ## Create license file
 	cat sample/LICENSE \
 	| sed "s/\[year\]/`date +%Y`/g" \
