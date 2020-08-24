@@ -1,5 +1,5 @@
 SNAME ?= [SNAME]
-NAME ?= [USERNAME]/$(SNAME)
+RNAME ?= [USERNAME]/$(SNAME)
 VER ?= `cat VERSION`
 BASENAME ?= [BASENAME]
 PARAM ?= [PARAM]
@@ -28,37 +28,45 @@ help: ## This help.
 .DEFAULT_GOAL := help
 
 # DOCKER TASKS
-# Build the container
 
-debug: ## Build the container
-	docker build -t $(NAME):$(GOARCH) \
+debug: ## Debug the container
+	docker build -t $(RNAME):$(GOARCH) \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(SNAME)_$(GOARCH)_$(VER) .
 build: ## Build the container
 	mkdir -p builds
-	docker build --no-cache -t $(NAME):$(GOARCH) \
+	docker build --no-cache -t $(RNAME):$(GOARCH) \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(GOARCH)_$(VER) \
 	. > builds/$(SNAME)_$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
+bootstrap: ## Start multicompiler
+	docker buildx inspect --bootstrap
+buildx: ## Buildx the container
+	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
+  	-t $(RNAME):latest -t $(RNAME):$(VER) --push \
+	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+	--build-arg VCS_REF=`git rev-parse --short HEAD` \
+	--build-arg BASEIMAGE=$(BASENAME) \
+	--build-arg VERSION=$(GOARCH)_$(VER) .
 tag: ## Tag the container
-	docker tag $(NAME):$(GOARCH) $(NAME):$(GOARCH)_$(VER)
+	docker tag $(RNAME):$(GOARCH) $(RNAME):$(GOARCH)_$(VER)
 push: ## Push the container
-	docker push $(NAME):$(GOARCH)_$(VER)
-	docker push $(NAME):$(GOARCH)
+	docker push $(RNAME):$(GOARCH)_$(VER)
+	docker push $(RNAME):$(GOARCH)
 deploy: build tag push
 manifest: ## Create an push manifest
-	docker manifest create $(NAME):$(VER) \
-	$(NAME):$(GOARCH)_$(VER) \
-	$(NAME):$(ARCH2)_$(VER) \
-	$(NAME):$(ARCH3)_$(VER)
-	docker manifest push --purge $(NAME):$(VER)
-	docker manifest create $(NAME):latest $(NAME):$(GOARCH) \
-	$(NAME):$(ARCH2) \
-	$(NAME):$(ARCH3)
-	docker manifest push --purge $(NAME):latest
+	docker manifest create $(RNAME):$(VER) \
+	$(RNAME):$(GOARCH)_$(VER) \
+	$(RNAME):$(ARCH2)_$(VER) \
+	$(RNAME):$(ARCH3)_$(VER)
+	docker manifest push --purge $(RNAME):$(VER)
+	docker manifest create $(RNAME):latest $(RNAME):$(GOARCH) \
+	$(RNAME):$(ARCH2) \
+	$(RNAME):$(ARCH3)
+	docker manifest push --purge $(RNAME):latest
 console: ## Start console in container
-	docker run -it --rm --entrypoint "/bin/ash" $(NAME):$(GOARCH)
+	docker run -it --rm --entrypoint "/bin/ash" $(RNAME):$(GOARCH)
 start: ## Start an container command
-	docker run --rm $(NAME):$(GOARCH) $(PARAM)
+	docker run --rm $(RNAME):$(GOARCH) $(PARAM)
