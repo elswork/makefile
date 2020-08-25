@@ -32,7 +32,7 @@ help: ## This help.
 debug: ## Debug the container
 	docker build -t $(RNAME):$(GOARCH) \
 	--build-arg BASEIMAGE=$(BASENAME) \
-	--build-arg VERSION=$(SNAME)_$(GOARCH)_$(VER) .
+	--build-arg VERSION=$(GOARCH)_$(VER) .
 build: ## Build the container
 	mkdir -p builds
 	docker build --no-cache -t $(RNAME):$(GOARCH) \
@@ -49,7 +49,7 @@ buildx: ## Buildx the container
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
-	--build-arg VERSION=$(GOARCH)_$(VER) .
+	--build-arg VERSION=$(VER) .
 tag: ## Tag the container
 	docker tag $(RNAME):$(GOARCH) $(RNAME):$(GOARCH)_$(VER)
 push: ## Push the container
