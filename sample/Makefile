@@ -29,6 +29,20 @@ help: ## This help.
 
 # DOCKER TASKS
 
+# New build way
+
+bootstrap: ## Start multicompiler
+	docker buildx inspect --bootstrap
+buildx: ## Buildx the container
+	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
+  	-t $(RNAME):latest -t $(RNAME):$(VER) --push \
+	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+	--build-arg VCS_REF=`git rev-parse --short HEAD` \
+	--build-arg BASEIMAGE=$(BASENAME) \
+	--build-arg VERSION=$(VER) .
+
+# Old build way
+
 debug: ## Debug the container
 	docker build -t $(RNAME):$(GOARCH) \
 	--build-arg BASEIMAGE=$(BASENAME) \
@@ -40,16 +54,7 @@ build: ## Build the container
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(GOARCH)_$(VER) \
-	. > builds/$(SNAME)_$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
-bootstrap: ## Start multicompiler
-	docker buildx inspect --bootstrap
-buildx: ## Buildx the container
-	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
-  	-t $(RNAME):latest -t $(RNAME):$(VER) --push \
-	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-	--build-arg VCS_REF=`git rev-parse --short HEAD` \
-	--build-arg BASEIMAGE=$(BASENAME) \
-	--build-arg VERSION=$(VER) .
+	. > builds/$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
 tag: ## Tag the container
 	docker tag $(RNAME):$(GOARCH) $(RNAME):$(GOARCH)_$(VER)
 push: ## Push the container
@@ -66,6 +71,9 @@ manifest: ## Create an push manifest
 	$(RNAME):$(ARCH2) \
 	$(RNAME):$(ARCH3)
 	docker manifest push --purge $(RNAME):latest
+
+# Operations
+
 console: ## Start console in container
 	docker run -it --rm --entrypoint "/bin/ash" $(RNAME):$(GOARCH)
 start: ## Start an container command
