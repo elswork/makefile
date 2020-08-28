@@ -5,7 +5,7 @@ endif
 
 export SNAME ?= test
 USERNAME ?= elswork
-NAME ?= $(USERNAME)/$(SNAME)
+RNAME ?= $(USERNAME)/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= latest
 BASENAME ?= alpine:$(BASE)
@@ -35,6 +35,9 @@ exp: ## Export
 	export $(shell sed 's/=.*//' .env)
 hola: ## hola
 	echo $(SNAME)
+
+# Operations
+
 licensefile: ## Create license file
 	cat sample/LICENSE \
 	| sed "s/\[year\]/`date +%Y`/g" \

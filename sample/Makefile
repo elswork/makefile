@@ -29,6 +29,8 @@ help: ## This help.
 
 # DOCKER TASKS
 
+# New build way
+
 bootstrap: ## Start multicompiler
 	docker buildx inspect --bootstrap
 buildx: ## Buildx the container
@@ -38,6 +40,9 @@ buildx: ## Buildx the container
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
+
+# Old build way
+
 debug: ## Debug the container
 	docker build -t $(RNAME):$(GOARCH) \
 	--build-arg BASEIMAGE=$(BASENAME) \
@@ -66,6 +71,9 @@ manifest: ## Create an push manifest
 	$(RNAME):$(ARCH2) \
 	$(RNAME):$(ARCH3)
 	docker manifest push --purge $(RNAME):latest
+
+# Operations
+
 console: ## Start console in container
 	docker run -it --rm --entrypoint "/bin/ash" $(RNAME):$(GOARCH)
 start: ## Start an container command
