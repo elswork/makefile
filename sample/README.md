@@ -8,7 +8,7 @@ A [Docker](http://docker.com) file to build [[SNAME]](https://github.com/[SNAME]
 
 | Website | GitHub | Docker Hub |
 | --- | --- | --- |
-| [[MYURL_DESCR]]([MYURL]) | [GitHub](https://github.com/[USERNAME]/[SNAME]) | [[SNAME]](https://hub.docker.com/r/[USERNAME]/[SNAME] "[USERNAME]/[SNAME] on Docker Hub") |
+| [[MYURL_DESCR]]([MYURL]) | [[SNAME]](https://github.com/[USERNAME]/[SNAME]) | [[SNAME]](https://hub.docker.com/r/[USERNAME]/[SNAME]) |
 
 | Docker Pulls | Docker Stars | Size/Layers |
 | --- | --- | --- |
