@@ -76,6 +76,6 @@ manifest: ## Create an push manifest
 # Operations
 
 console: ## Start console in container
-	docker run -it --rm --entrypoint "/bin/ash" $(RNAME):$(GOARCH)
+	docker run -it --rm --entrypoint "/bin/ash" $(RNAME):$(VER)
 start: ## Start an container command
-	docker run --rm $(RNAME):$(GOARCH) $(PARAM)
+	docker run --rm $(RNAME):$(VER) $(PARAM)
