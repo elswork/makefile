@@ -3,6 +3,7 @@ RNAME ?= [USERNAME]/$(SNAME)
 VER ?= `cat VERSION`
 BASENAME ?= [BASENAME]
 PARAM ?= [PARAM]
+TARGET_PLATFORM ?= linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
 
 # HELP
 # This will output the help for each task
@@ -34,12 +35,13 @@ build: ## Build the container
 	docker buildx inspect --bootstrap
 debugx: ## Buildx in Debug mode
 	docker buildx build \
+	--platform ${TARGET_PLATFORM} \
 	-t $(RNAME):debug --pull --load \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
 buildx: ## Buildx the container
 	docker buildx build --no-cache \
-	--platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 \
+	--platform ${TARGET_PLATFORM} \
   	-t $(RNAME):latest -t $(RNAME):$(VER) --pull --push \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
