@@ -4,6 +4,9 @@ VER ?= `cat VERSION`
 BASENAME ?= [BASENAME]
 PARAM ?= [PARAM]
 TARGET_PLATFORM ?= linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
+NO_CACHE ?= 
+# NO_CACHE ?= --no-cache
+# linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
 
 # HELP
 # This will output the help for each task
@@ -25,7 +28,7 @@ debug: ## Debug the container
 	--build-arg VERSION=$(VER) .
 build: ## Build the container
 	mkdir -p builds
-	docker build --no-cache -t $(RNAME):$(VER) \
+	docker build $(NO_CACHE) -t $(RNAME):$(VER) -t $(RNAME):latest \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
@@ -40,9 +43,9 @@ debugx: ## Buildx in Debug mode
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
 buildx: ## Buildx the container
-	docker buildx build --no-cache \
+	docker buildx build $(NO_CACHE) \
 	--platform ${TARGET_PLATFORM} \
-  	-t $(RNAME):latest -t $(RNAME):$(VER) --pull --push \
+	-t $(RNAME):$(VER) -t $(RNAME):latest --pull --push \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
