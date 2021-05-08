@@ -34,7 +34,7 @@ build: ## Build the container
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) \
 	. > builds/$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
-	bootstrap: ## Start multicompiler
+bootstrap: ## Start multicompiler
 	docker buildx inspect --bootstrap
 debugx: ## Buildx in Debug mode
 	docker buildx build \
