@@ -65,6 +65,7 @@ dockerfile: ## Create Dockerfile file
 	cat sample/Dockerfile \
 	| sed "s/\[SNAME\]/$(SNAME)/g" \
 	| sed "s/\[BASENAME\]/$(BASENAME)/g" \
+	| sed "s/\[USERNAME\]/$(USERNAME)/g" \
 	| sed "s/\[AUTHOR\]/$(AUTHOR)/g" \
 	| sed "s/\[MANTAINER\]/$(MANTAINER)/g" \
 	| sed "s/\[VENDOR\]/$(VENDOR)/g" \
