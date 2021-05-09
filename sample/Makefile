@@ -39,7 +39,7 @@ bootstrap: ## Start multicompiler
 debugx: ## Buildx in Debug mode
 	docker buildx build \
 	--platform ${TARGET_PLATFORM} \
-	-t $(RNAME):debug --pull --load \
+	-t $(RNAME):debug --pull \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
 buildx: ## Buildx the container
