@@ -10,9 +10,9 @@ A [Docker](http://docker.com) file to build [[SNAME]](https://github.com/[SNAME]
 | --- | --- | --- |
 | [[MYURL_DESCR]]([MYURL]) | [[SNAME]](https://github.com/[USERNAME]/[SNAME]) | [[SNAME]](https://hub.docker.com/r/[USERNAME]/[SNAME]) |
 
-| Docker Pulls | Docker Stars | Size/Layers |
-| --- | --- | --- |
-| [![](https://img.shields.io/docker/pulls/[USERNAME]/[SNAME].svg)](https://hub.docker.com/r/[USERNAME]/[SNAME] "[SNAME] on Docker Hub") | [![](https://img.shields.io/docker/stars/[USERNAME]/[SNAME].svg)](https://hub.docker.com/r/[USERNAME]/[SNAME] "[SNAME] on Docker Hub") | [![](https://images.microbadger.com/badges/image/[USERNAME]/[SNAME].svg)](https://microbadger.com/images/[USERNAME]/[SNAME] "[SNAME] on microbadger.com") |
+| Docker Pulls | Docker Stars | Size | Sponsors |
+| --- | --- | --- | --- |
+| [![Docker pulls](https://img.shields.io/docker/pulls/[USERNAME]/[SNAME].svg)](https://hub.docker.com/r/[USERNAME]/[SNAME] "[SNAME] on Docker Hub") | [![Docker stars](https://img.shields.io/docker/stars/[USERNAME]/[SNAME].svg)](https://hub.docker.com/r/[USERNAME]/[SNAME] "[SNAME] on Docker Hub") | [![Docker Image size](https://img.shields.io/docker/image-size/[USERNAME]/[SNAME])](https://hub.docker.com/r/[USERNAME]/[SNAME] "[SNAME] on Docker Hub") | [![GitHub Sponsors](https://img.shields.io/github/sponsors/[USERNAME])](https://github.com/sponsors/[USERNAME] "Sponsor me!") |
 
 ## Compatible Architectures
 

@@ -46,6 +46,7 @@ buildx: ## Buildx the container
 	docker buildx build $(NO_CACHE) \
 	--platform ${TARGET_PLATFORM} \
 	-t $(RNAME):$(VER) -t $(RNAME):latest --pull --push \
+	-t ghcr.io/$(RNAME):$(VER) -t ghcr.io/$(RNAME):latest \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \

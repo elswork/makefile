@@ -5,15 +5,15 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 LABEL mantainer="[MANTAINER]" \
-    org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.name="[SNAME]" \
-    org.label-schema.description="[SNAME] is a general purpose tool" \
-    org.label-schema.url="[MYURL]/[SNAME]" \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url="https://github.com/[USERNAME]/[SNAME]" \
-    org.label-schema.vendor="[VENDOR]" \
-    org.label-schema.version=$VERSION \
-    org.label-schema.schema-version="1.0"
+    org.opencontainers.image.title="[SNAME]" \
+    org.opencontainers.image.description="[SNAME] is a general purpose tool" \
+    org.opencontainers.image.vendor="[VENDOR]" \
+    org.opencontainers.image.url="[MYURL]/[SNAME]" \
+    org.opencontainers.image.source="https://github.com/[USERNAME]/[SNAME]" \
+    org.opencontainers.image.version=$VERSION \ 
+    org.opencontainers.image.created=$BUILD_DATE \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.licenses=MIT
 
 RUN apk add --no-cache [SNAME]
 WORKDIR /data
