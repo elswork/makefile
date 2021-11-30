@@ -2,7 +2,7 @@
 
 A [Docker](http://docker.com) file to build [[SNAME]](https://github.com/[SNAME]).
 
-> Be aware! You should read carefully the usage documentation of every tool!
+> Be aware! You should carefully read the usage documentation of every tool!
 
 ## Details
 
@@ -16,7 +16,7 @@ A [Docker](http://docker.com) file to build [[SNAME]](https://github.com/[SNAME]
 
 ## Compatible Architectures
 
-This image has been builded using [buildx](https://docs.docker.com/buildx/working-with-buildx/) for this architectures: 
+This image has been builded using [buildx](https://docs.docker.com/buildx/working-with-buildx/) for these architectures: 
 - amd64 arm64 ppc64le s390x 386 arm/v7 arm/v6
 
 ## Usage Example
